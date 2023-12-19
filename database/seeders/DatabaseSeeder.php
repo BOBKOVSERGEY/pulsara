@@ -1,22 +1,40 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Enums\Identity\Provider;
+use App\Enums\Identity\Role;
+use App\Enums\Publishing\Status;
+use App\Models\Group;
+use App\Models\Profile;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+final class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $user = User::factory()->create([
+            'first_name' => 'Sergey',
+            'last_name' => 'Bobkov',
+            'email' => 'bobkovsergeyarkadevich@gmail.com',
+            'role' => Role::Admin,
+            'provider' => Provider::Email,
+            'avatar' => 'https://github.com/sergeybobkov.png',
+        ]);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $profile = Profile::factory()->for($user)->create([
+            'handle' => 'bobkovs',
+            'country' => 'ru',
+        ]);
+
+        $group = Group::factory()->for($user)->create([
+            'name' => 'feed',
+            'description' => 'The default news feed group.',
+            'status' => Status::Verified,
+        ]);
     }
 }
