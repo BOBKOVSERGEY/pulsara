@@ -11,3 +11,7 @@ sail artisan stub:publish
 # migration with seeds
 sail artisan migrate:fresh --seed
 
+#github auth
+http://localhost/oauth/github/redirect
+
+

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\OAuth\GitHub;
 
+use App\Services\IdentityService;
 use Illuminate\Http\Request;
 use Laravel\Socialite\SocialiteManager;
 use Symfony\Component\HttpFoundation\RedirectResponse;
